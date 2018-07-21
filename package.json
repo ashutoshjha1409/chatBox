@@ -4,7 +4,7 @@
   "description": "app built for learning web sockets using sockets.io",
   "main": "index.js",
   "scripts": {
-    "start": "npm start"
+    "start": "node ./bin/www"
   }, 
   "author": "Ashutosh",
   "license": "ISC",
