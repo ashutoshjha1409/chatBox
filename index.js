@@ -2,9 +2,9 @@ var express = require('express');
 var app = express();
 var socket = require('socket.io');
 var mongo = require('mongodb').MongoClient;
-
-var server = app.listen('4000', function(){
-    console.log('Listening on port 4000');
+var port = process.env.PORT || 4000;
+var server = app.listen(port, function(){
+    console.log('Listening on port ', port);
 });
 
 /*mongo.connect('mongodb://127.0.0.1:27017/mongochat', function(err, db){
