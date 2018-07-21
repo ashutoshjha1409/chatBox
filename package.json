@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "app built for learning web sockets using sockets.io",
   "main": "index.js",
+  "engines": {
+    "node": "6.10.1"
+  }, 
   "scripts": {
     "start": "index.js"
   }, 
