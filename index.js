@@ -18,15 +18,27 @@ mongo.connect('mongodb://127.0.0.1:27017/mongochat', function(err, db){
     //connect to socket.io
     io.on('connection', function(socket){
         console.log('Made socket connection', socket.id);
-        let chat = db.collection('chats')
+        let chat = db.collection('chats');
 
         //create function to send status
         sendStatus = function(s){
             io.sockets.emit('status', s);
         }
 
+        //Get chat from collection
+        chat.find().limit(100).sort({_id: 1}).toArray(function(err, res){
+            if (err) throw err;
+            
+            io.sockets.emit('output', res);
+        });
+
         socket.on('chat', function(data){
-            io.sockets.emit('chat', data);
+            let handle = data.handle || 'Anonymous';
+            let message = data.message || ' ';           
+            
+            chat.insert({handle: handle, message: message}, function(){
+                io.sockets.emit('chat', data);
+            })
         });
 
         socket.on('typing', function(data){
